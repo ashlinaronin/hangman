@@ -13,6 +13,15 @@
                 </div>
                 <button name='submit' class='btn-success'>Submit</button>
             </form>
+
+                {% for current_letter in current_game.getWord %}
+                    {# if the index of this current letter is in the guessed indices array, then display it, otherwise display an underscore#}
+                    {% if loop.index in current_game.getGuessedIndices %}
+                        {{ current_letter }}
+                    {% else %}
+                        _
+                    {% endif %}
+                {% endfor %}
         </div>
     </body>
 </html>
