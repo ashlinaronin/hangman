@@ -2,14 +2,17 @@
     <head>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
         <title>Areyouamurderer.com</title>
+        {% if current_game.hasWon == true %}
+            <meta http-equiv="refresh" content="1; URL='/gameover'" />
+        {% endif %}
     </head>
     <body>
         <div class='container'>
             <h1>Will he die?</h1>
             <form action='/feedback' method='post'>
                 <div class='form-group'>
-                    <label for='guess'>Enter your guess here </label>
-                    <input type='string' name='guess' id='guess' class='form-control'>
+                    <label for='guess'>Enter a letter here (no numbers!):</label>
+                    <input type='string' name='guess' id='guess' class='form-control' maxlength='1' pattern="[a-z]*">
                 </div>
                 <button name='submit' class='btn-success'>Submit</button>
             </form>
@@ -22,6 +25,7 @@
                         _
                     {% endif %}
                 {% endfor %}
+
         </div>
     </body>
 </html>

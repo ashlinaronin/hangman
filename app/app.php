@@ -45,6 +45,10 @@
         return $output;
     });
 
+    $app->get('/gameover', function() use($app){
+        return $app['twig']->render('gameover.html.twig', array('current_game' => Game::getCurrentGame()));    
+    });
+
     $app->get('/restart', function() use($app) {
         Game::getCurrentGame()->restart();
         return "game restarted. <a href='/hangman'>go to hangman.</a>";

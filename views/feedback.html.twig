@@ -5,12 +5,13 @@
         <title>Hangman yes or no</title>
     </head>
     <body>
-        {% if new_guess.isCorrect == true %}
-            <h1>You're Right!</h1>
-        {% else %}
-            <h1> You're SO wrong and really bad at this game.</h1>
-        {% endif %}
-
-        <h3> You guessed letter "{{ new_guess.getLetter() }}"</h3>
+        <div class='container'>
+            {% if new_guess.isCorrect == true %}
+                <h1>You're Right!</h1>
+            {% else %}
+                <h1> You're SO wrong and really bad at this game.</h1>
+            {% endif %}
+            <h3> You guessed letter "{{ new_guess.getLetter() }}"</h3>
+        </div>
     </body>
 </html>

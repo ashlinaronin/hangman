@@ -2,9 +2,11 @@
 class Game {
     private $word; //array
     private $guesses_left;
-    private $guesses_made;
     private $all_guesses;
     private $guessed_indices;
+
+    // this is a bad idea
+    private $word_as_string;
 
     function __construct()
     {
@@ -18,9 +20,9 @@ class Game {
         // choose random word, make it into an array, add it to the word parameter of this game object
         $random_word = $word_options[array_rand($word_options)];
         $this->word = str_split($random_word);
+        $this->word_as_string = $random_word;
 
         $this->guesses_left = 6;
-        $this->guesses_made = 0;
 
         // a new game starts out with no guesses
         $this->all_guesses = array();
@@ -42,10 +44,6 @@ class Game {
     {
         $this->guesses_left = (int) $new_left;
     }
-    function setGuessesMade ($new_made)
-    {
-        $this->guesses_made = (int) $new_made;
-    }
 
 
 
@@ -55,13 +53,15 @@ class Game {
     {
         return $this->word;
     }
+
+    function getWordAsString()
+    {
+        return $this->word_as_string;
+    }
+
     function getGuessesLeft()
     {
         return $this->guesses_left;
-    }
-    function getGuessesMade()
-    {
-        return $this->guesses_made;
     }
     function getGuessedIndices()
     {
@@ -87,9 +87,11 @@ class Game {
 
 
     // adding a new guess means adding a new Guess object to the all_guesses array
+    // we also need to decrement the amount of guesses left
     function addGuess($new_guess)
     {
         array_push($this->all_guesses, $new_guess);
+        $this->setGuessesLeft($this->getGuessesLeft()-1);
     }
 
     function checkGuess($guess_to_check)
@@ -108,6 +110,15 @@ class Game {
 
             $count++;
         }
+    }
+    //check to see if the number of revealed letters match the total letters in the word.
+    function hasWon()
+    {
+        if (count($this->getGuessedIndices()) == count($this->getWord())) {
+            return true;
+        } else {
+            return false;
+        };
     }
 
 
