@@ -35,8 +35,19 @@
 
     // game over page
 
-    $app->get('/testword', function() use($app) {
-        return "the word is " . Game::getCurrentGame()->getWord();
+
+    $app->get('/tests', function() use($app) {
+        $output = "guessed indices are ";
+        foreach (Game::getCurrentGame()->getGuessedIndices() as $current_guessed_index) {
+            $output .= $current_guessed_index . ", ";
+        }
+
+        return $output;
+    });
+
+    $app->get('/restart', function() use($app) {
+        Game::getCurrentGame()->restart();
+        return "game restarted. <a href='/hangman'>go to hangman.</a>";
     });
 
     return $app;

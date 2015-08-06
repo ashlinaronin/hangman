@@ -16,7 +16,7 @@
 
                 {% for current_letter in current_game.getWord %}
                     {# if the index of this current letter is in the guessed indices array, then display it, otherwise display an underscore#}
-                    {% if loop.index in current_game.getGuessedIndices %}
+                    {% if loop.index-1 in current_game.getGuessedIndices %}
                         {{ current_letter }}
                     {% else %}
                         _

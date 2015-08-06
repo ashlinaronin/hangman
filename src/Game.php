@@ -95,9 +95,8 @@ class Game {
     function checkGuess($guess_to_check)
     {
         $count = 0;
-        $correct_word = $this->getWord();
 
-        foreach ($correct_word as $current_letter) {
+        foreach ($this->getWord() as $current_letter) {
             // does this guess match the current letter?
             // if yes, add the current index to guessed indices
             // if yes, also change correct param of this guess to true
