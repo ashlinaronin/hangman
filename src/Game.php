@@ -58,3 +58,4 @@ class Game {
         $_SESSION['current_game'] = new Game();
     }
 }
+?>
