@@ -16,7 +16,9 @@
     ));
 
     // hangman page
-
+    $app->get('/hangman', function() use($app){
+        return $app['twig']->render('hangman.html.twig');
+    });
     // feedback page right or wrong
 
     // game over page

@@ -6,7 +6,7 @@ class Game {
 
     function __construct()
     {
-        private $wordOptions = array(
+        $wordOptions = array(
             "chicken",
             "robot",
             "filth",
