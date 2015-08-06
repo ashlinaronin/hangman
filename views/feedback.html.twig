@@ -1,9 +1,16 @@
 <html>
     <head>
-        <title></title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+        <meta http-equiv="refresh" content="3; URL='/hangman'" />
+        <title>Hangman yes or no</title>
     </head>
     <body>
-        You guessed letter "{{ new_guess.getLetter() }}"
-        <a href="/hangman">Guess again</a>
+        {% if new_guess.isCorrect == true %}
+            <h1>You're Right!</h1>
+        {% else %}
+            <h1> You're SO wrong and really bad at this game.</h1>
+        {% endif %}
+
+        <h3> You guessed letter "{{ new_guess.getLetter() }}"</h3>
     </body>
 </html>
