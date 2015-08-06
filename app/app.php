@@ -3,9 +3,12 @@
     require_once __DIR__."/../src/Game.php";
     require_once __DIR__."/../src/Guess.php";
 
-    // initialize cookies
+    // initialize cookies, create new Game object
     session_start();
-    // need to initialize specific cookies we want to use here
+    if (empty($_SESSION['current_game'])) {
+        $_SESSION['current_game'] = new Game();
+    }
+
 
     $app = new Silex\Application();
     $app['debug'] = true;
@@ -21,12 +24,12 @@
     });
 
     $app->post('/feedback', function() use($app) {
-        $new_guess = new Guess($_POST['letter']);
+        $new_guess = new Guess($_POST['guess']);
         $current_game = Game::getCurrentGame();
         $current_game->addGuess($new_guess);
 
         // the feedback twig page only needs data from the current guess, not the whole game
-        return $app['twig']->render('feedback.html.twig', array('new_guess', $new_guess));
+        return $app['twig']->render('feedback.html.twig', array('new_guess' => $new_guess));
     });
     // feedback page right or wrong
 
