@@ -26,5 +26,6 @@ class Guess {
         $this->letter = $new_letter;
         $this->correct = false;
     }
+    
 }
 ?>

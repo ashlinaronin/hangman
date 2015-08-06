@@ -1,8 +1,9 @@
 <?php
 class Game {
     private $word;
-    private $guessesLeft;
-    private $guessesMade;
+    private $guesses_left;
+    private $guesses_made;
+    private $all_guesses;
 
     function __construct()
     {
@@ -15,8 +16,11 @@ class Game {
 
         // choose random word
         $this->word = $wordOptions[array_rand($wordOptions)];
-        $this->guessesLeft = 6;
-        $this->guessesMade = 0;
+        $this->guesses_left = 6;
+        $this->guesses_made = 0;
+
+        // a new game starts out with no guesses
+        $this->all_guesses = array();
     }
 
     // setters
@@ -26,11 +30,11 @@ class Game {
     }
     function setGuessesLeft ($new_left)
     {
-        $this->guessesLeft = (int) $new_left;
+        $this->guesses_left = (int) $new_left;
     }
     function setGuessesMade ($new_made)
     {
-        $this->guessesMade = (int) $new_made;
+        $this->guesses_made = (int) $new_made;
     }
 
     // getters
@@ -40,11 +44,11 @@ class Game {
     }
     function getGuessesLeft()
     {
-        return $this->guessesLeft;
+        return $this->guesses_left;
     }
     function getGuessesMade()
     {
-        return $this->guessesMade;
+        return $this->guesses_made;
     }
 
     //save function to store current game in cookies
@@ -56,6 +60,17 @@ class Game {
     function restart()
     {
         $_SESSION['current_game'] = new Game();
+    }
+
+    // adding a new guess means adding a new Guess object to the all_guesses array
+    function addGuess($new_guess)
+    {
+        array_push($this->all_guesses, $new_guess);
+    }
+
+    static function getCurrentGame()
+    {
+        return $_SESSION['current_game'];
     }
 }
 ?>
